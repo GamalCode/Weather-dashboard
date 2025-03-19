@@ -1,0 +1,16 @@
+﻿@model WeatherDashboard.Models.FavoriteCity
+
+<h1>Favorite City</h1>
+
+@if (Model != null)
+{
+    <h2>@Model.Name</h2>
+    <p>Temperature: @Model.Temp °C</p>
+    <p>Humidity: @Model.Humidity %</p>
+    <p>Wind Speed: @Model.WindSpeed m/s</p>
+    <p>Description: @Model.Description</p>
+}
+else
+{
+    <p>No favorite city found.</p>
+}

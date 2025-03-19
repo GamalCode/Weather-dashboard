@@ -1,0 +1,29 @@
+﻿@model WeatherDashboard.Models.WeatherInformation
+
+<h1>Weather Forecast</h1>
+
+<form method="get" asp-action="Index" style="display: flex; align-items: center;">
+    <input type="text" name="city" placeholder="Enter city name" class="form-control" style="width: auto; margin-right: 10px;" />
+    <button type="submit" class="btn btn-primary" style="margin-top: -2px;">Search</button>
+</form>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (Model != null)
+{
+    <h2>@Model.Name</h2>
+    <p>Temperature: @(Model.Main?.Temp ?? 0) °C</p>
+    <p>Humidity: @(Model.Main?.Humidity ?? 0) %</p>
+    <p>Wind Speed: @(Model.Wind?.Speed ?? 0) m/s</p>
+    <p>Description: @(Model.Weather?.FirstOrDefault()?.Description ?? "N/A")</p>
+
+    <form method="post" asp-action="AddToFavorites">
+        <input type="hidden" name="city" value="@Model.Name" />
+        <button type="submit" class="btn btn-primary">Set as Favorite</button>
+    </form>
+}
